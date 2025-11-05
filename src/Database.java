@@ -66,13 +66,16 @@ public class Database {
 
 
 
-        String query = "INSERT INTO menu(piatto, prezzo, quantita) VALUES ( "+piatto+", "+prezzo+", "+quantita+")";
+        String query = "INSERT INTO menu(piatto, prezzo, quantita) VALUES ( ?, ? ,?)";
         try{
             PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, piatto);
+            statement.setDouble(2, prezzo);
+            statement.setInt(3, quantita);
             statement.executeUpdate();
         }
         catch (SQLException e) {
-            System.err.println("Insert failed");
+            System.err.println("Insert failed: " + e.getMessage());
             return false;
         }
 

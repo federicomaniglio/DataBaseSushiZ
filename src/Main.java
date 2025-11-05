@@ -3,6 +3,11 @@
 public class Main {
     public static void main(String[] args) {
         Database database = null;
+        try {
+            database = Database.getInstance();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         if(database.insert("Udon",10,1))
             System.out.printf("Piatto inserito con successo");
